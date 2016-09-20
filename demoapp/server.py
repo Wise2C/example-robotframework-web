@@ -27,7 +27,7 @@ class DemoServer(TCPServer):
     allow_reuse_address = True
 
     def __init__(self, port=PORT):
-        TCPServer.__init__(self, ('localhost', int(port )), SimpleHTTPRequestHandler)
+        TCPServer.__init__(self, ('0.0.0.0', int(port )), SimpleHTTPRequestHandler)
 
     def serve(self, directory=ROOT):
         chdir(directory)
