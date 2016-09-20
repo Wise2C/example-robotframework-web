@@ -174,3 +174,8 @@ installed before they can be used with Selenium and Selenium2Library.
 .. _report.html: http://robotframework.bitbucket.org/WebDemo/report.html
 .. _log.html: http://robotframework.bitbucket.org/WebDemo/log.html
 .. _Robot Framework User Guide: http://robotframework.org/robotframework/#user-guide
+
+Using in docker
+----------------
+
+    docker run --rm -v `pwd`:/app rocketcity/robotframework-docker  sh -c 'cd /app && pybot -v BROWSER:phantomjs -v  SERVER:10.0.0.6:7272 -d report login_tests'
