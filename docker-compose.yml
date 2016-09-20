@@ -1,0 +1,6 @@
+web-demo:
+  tty: true
+  image: registry.aliyuncs.com/wise2c/rf-web-demo
+  stdin_open: true
+  ports:
+  - 7272:7272
