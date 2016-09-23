@@ -2,47 +2,17 @@
 Web testing with Robot Framework and Selenium2Library
 =====================================================
 
-`Robot Framework`_ is a generic open source test automation framework and
-Selenium2Library_ is one of the many test libraries that can be used with
-it. In addition to showing how they can be used together for web testing,
-this demo introduces the basic Robot Framework test data syntax, how tests
-are executed, and how logs and reports look like.
-
-.. contents:: **Contents:**
-   :depth: 1
-   :local:
-
-Downloading demo package
-========================
-
-To get the demo, you can either download and extract the latest
-``WebDemo-<date>.zip`` package from the `download page`_ or checkout the
-`source code`_ directly. As a result you get ``WebDemo`` directory with
-``demoapp`` and ``login_tests`` sub directories.
-
-Example `test cases`_ and `generated results`_ are available also online.
-There is thus no need to download the demo if you are not interested in
-`running it`__ yourself.
-
-__ `running demo`_
-
-Demo application
+示例应用
 ================
 
-The demo application is a very simple login page shown below. With
-user name ``demo`` and password ``mode`` you get into a welcome page, and
-otherwise you end up to an error page. How to start and stop the
-application yourself is explained in the `Starting demo application`_
-section.
+示例程序是一个非常简单的登录页面（如下所示）。使用用户名`demo`和密码'mode'你可以等到到应用首页，否则进入错误页面
 
 .. figure:: demoapp.png
 
 Test cases
 ==========
 
-Test case files as well as a resource file used by them are located in
-the ``login_test`` directory. Click file names below to see the latest versions
-online.
+测试用例以及相应的资源文件包含在`login_test`目录下
 
 `valid_login.robot`_
     A test suite with a single test for valid login.
@@ -73,109 +43,67 @@ online.
     domain specific language. They utilize keywords provided
     by the imported Selenium2Library_.
 
-See `Robot Framework User Guide`_ for more details about the test data syntax.
-
-Generated results
+生成测试报告
 =================
 
-After `running tests`_ you will get report and log in HTML format. Example
-files are also visible online in case you are not interested in running
-the demo yourself:
+执行测试用例之后，可以得到测试报告以及测试日志文件
 
 - `report.html`_
 - `log.html`_
 
-Running demo
+运行示例
 ============
 
-Preconditions
+环境准备
 -------------
 
-A precondition for running the tests is having `Robot Framework`_ and
-Selenium2Library_ installed, and they in turn require
-Python_. Robot Framework `installation instructions`__ cover both
-Robot and Python installations, and Selenium2Library has its own
-`installation instructions`__.
-
-In practice it is easiest to install Robot Framework and
-Selenium2Library along with its dependencies using `pip`_ package
-manager. Once you have pip installed, all you need to do is running
-these commands::
+为了运行该测试用例我们需要在本地安装Robot Framework以及Selenium2Library,使用pip我们可以快速安装相应的环境依赖
 
     pip install robotframework
     pip install robotframework-selenium2library
 
-__ https://github.com/robotframework/robotframework/blob/master/INSTALL.rst
-__ https://github.com/robotframework/Selenium2Library/blob/master/INSTALL.rst
 
-Starting demo application
+启动应用程序
 -------------------------
 
-Running tests requires the `demo application`_ located under ``demoapp``
-directory to be running.  It can be started either by double clicking
-``demoapp/server.py`` file in a file manager or by executing it from the
-command line::
+运行测试用例之前需要在本机启动测试的应用程序，示例程序源码位于`demoapp`目录下
+
+执行命令::
 
     python demoapp/server.py
 
-After the demo application is started, it is be available in URL
-http://localhost:7272. You can test it manually, valid credentials are
-``demo/mode``, and it needs to be running while executing the automated
-tests.
+示例程序启动之后，可以通过http://localhost:7272访问该示例应用，你可以尝试进行手动测试，使用`demo/mode`登录该应用
 
-If the application was started by double-clicking ``demoapp/server.py``
-file, it can be shut down by closing the opened window. If it was
-executed from the command line, using ``Ctrl-C`` is enough.
-
-Running tests
+运行自动化测试
 -------------
 
-The `test cases`_ are located in the ``login_tests`` directory. They can be
-executed using the ``robot`` command::
+测试用例位于login_tests目录下，我们可以直接执行命令::
 
     robot login_tests
 
-.. note:: If you are using Robot Framework 2.9 or earlier, you need to
-          use the ``pybot`` command instead.
+.. note:: Robot Framework 2.9以及跟早的版本使用pybot命令
 
-You can also run an individual test case file and use various command line
-options supported by Robot Framework::
+运行``robot --help``查看更多帮助信息
 
-    robot login_tests/valid_login.robot
-    robot --test InvalidUserName --loglevel DEBUG login_tests
-
-Run ``robot --help`` for more information about the command line usage and see
-`Robot Framework User Guide`_ for more details about test execution in general.
-
-Using different browsers
+切换浏览器支持
 ------------------------
 
-The browser that is used is controlled by ``${BROWSER}`` variable defined in
-`resource.robot`_ resource file. Firefox browser is used by default, but that
-can be easily overridden from the command line::
+在`resource.robot`文件中我们定义了环境变量``${BROWSER}``,用以切换测试用浏览器
+
+通过以下命令我们可以快速切换UI测试时使用的浏览器
 
     robot --variable BROWSER:Chrome login_tests
     robot --variable BROWSER:IE login_tests
 
-Consult Selenium2Library_ documentation about supported browsers. Notice also
-that other browsers than Firefox require separate browser drivers to be
-installed before they can be used with Selenium and Selenium2Library.
-
-.. _Robot Framework: http://robotframework.org
-.. _Selenium2Library: https://github.com/robotframework/Selenium2Library
-.. _Python: http://python.org
-.. _pip: http://pip-installer.org
-.. _download page: https://bitbucket.org/robotframework/webdemo/downloads
-.. _source code: https://bitbucket.org/robotframework/webdemo/src
-.. _valid_login.robot: https://bitbucket.org/robotframework/webdemo/src/master/login_tests/valid_login.robot
-.. _invalid_login.robot: https://bitbucket.org/robotframework/webdemo/src/master/login_tests/invalid_login.robot
-.. _gherkin_login.robot: https://bitbucket.org/robotframework/webdemo/src/master/login_tests/gherkin_login.robot
-.. _resource.robot: https://bitbucket.org/robotframework/webdemo/src/master/login_tests/resource.robot
-.. _report.html: http://robotframework.bitbucket.org/WebDemo/report.html
-.. _log.html: http://robotframework.bitbucket.org/WebDemo/log.html
-.. _Robot Framework User Guide: http://robotframework.org/robotframework/#user-guide
-
-Using in docker
+基于Dokcer的自动化测试
 ----------------
 
-    docker run --rm -v `pwd`:/app rocketcity/robotframework-docker  sh -c 'cd /app && pybot -v BROWSER:phantomjs -v  SERVER:10.0.0.6:7272 -d report login_tests'
+在容器中运行UI相关的自动化测试用例时最主要的问题是docker容器当中不包含Screen信息，所以无法打开firefox进行UI相关的测试。
+
+这里我们可以通过使用phantomjs作为浏览器虚拟实现，来完成UI相关的自动化验收测试
+
+使用一下命令可以在容器当中实现容器内的UI自动化测试
+
+···
+docker run --rm -v `pwd`:/app rocketcity/robotframework-docker  sh -c 'cd /app && pybot -v BROWSER:phantomjs -v  SERVER:10.0.0.6:7272 -d report login_tests'
+···
