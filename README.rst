@@ -104,4 +104,4 @@ Test cases
 
 使用一下命令可以在容器当中实现容器内的UI自动化测试::
 
-    docker run --rm -v `pwd`:/app rocketcity/robotframework-docker  sh -c 'cd /app && pybot -v BROWSER:phantomjs -v  SERVER:10.0.0.6:7272 -d report login_tests'
+    docker run --rm -v `pwd`:/app rocketcity/robotframework-docker  sh -c 'cd /app && pybot -v BROWSER:phantomjs -v  SERVER:10.0.0.6:7272 -d report --xunit xunit login_tests'
